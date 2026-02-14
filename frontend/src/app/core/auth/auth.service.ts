@@ -59,27 +59,19 @@ export class AuthService {
 
   getUserRole(): string | null {
     const user = this.getUser();
-    console.log('🔍 DEBUG - Full user object from token:', user);
-    const role = user ? user.role : null;
-    console.log('🔍 DEBUG - Extracted role:', role);
-    return role;
+    return user ? user.role : null;
   }
 
   redirectToDashboard(): void {
     const role = this.getUserRole();
-    console.log('🚀 DEBUG - Redirecting with role:', role);
 
     if (role === 'PASSENGER') {
-      console.log('✅ Redirecting to /passenger');
       this.router.navigate(['/passenger']);
     } else if (role === 'DRIVER') {
-      console.log('✅ Redirecting to /driver');
       this.router.navigate(['/driver']);
     } else if (role === 'ADMIN') {
-      console.log('✅ Redirecting to /admin');
       this.router.navigate(['/admin']);
     } else {
-      console.log('❌ No valid role found, redirecting to login');
       this.router.navigate(['/auth/login']);
     }
   }

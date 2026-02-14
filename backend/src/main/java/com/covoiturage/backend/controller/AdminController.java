@@ -62,26 +62,16 @@ public class AdminController {
         long totalTrajets = trajetRepository.count();
         long totalReservations = reservationRepository.count();
         
-        System.out.println("📊 Total Users: " + totalUsers);
-        System.out.println("📊 Total Trajets: " + totalTrajets);
-        System.out.println("📊 Total Reservations: " + totalReservations);
-        
         // Users by role
         long passengers = userRepository.countByRole(Role.PASSENGER);
         long drivers = userRepository.countByRole(Role.DRIVER);
         long admins = userRepository.countByRole(Role.ADMIN);
-        
-        System.out.println("📊 Passengers: " + passengers);
-        System.out.println("📊 Drivers: " + drivers);
-        System.out.println("📊 Admins: " + admins);
         
         Map<String, Long> usersByRole = Map.of(
             "PASSENGER", passengers,
             "DRIVER", drivers,
             "ADMIN", admins
         );
-        
-        System.out.println("📊 Final usersByRole map: " + usersByRole);
         
         return ResponseEntity.ok(Map.of(
             "totalUsers", totalUsers,

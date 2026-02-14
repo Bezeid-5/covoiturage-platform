@@ -152,12 +152,8 @@ export class AdminOverviewComponent implements OnInit {
 
   loadStats(): void {
     this.adminService.getStatistics().subscribe({
-      next: (data) => {
-        console.log('📊 Admin Stats received:', data);
-        console.log('📊 usersByRole:', data?.usersByRole);
-        this.stats = data;
-      },
-      error: (err) => console.error('❌ Error loading stats', err)
+      next: (data) => this.stats = data,
+      error: (err) => console.error('Error loading stats', err)
     });
   }
 }
