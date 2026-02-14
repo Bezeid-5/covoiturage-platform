@@ -1,0 +1,70 @@
+﻿[33mÔØ»[39m Building...
+[32mÔ£ö[39m Building...
+Application bundle generation failed. [4.807 seconds]
+
+npx : 
+[1m[31m[31mX [41
+;31m[[41;97mERROR[
+41;31m][0m 
+[1mNG9: Property 
+'bookRide' does not 
+exist on type 'RideD
+etailComponent'.[0m
+ [1m[35m[plugin an
+gular-compiler][0m
+Au caractère 
+Ligne:1 : 1
++ npx ng build --con
+figuration=productio
+n > build_error.log 
+2>&1
++ ~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~
+~~~~
+    + CategoryInfo  
+            : NotS  
+  pecified: ([1m   
+ [31m[31mX...r    
+-compiler][0m:    
+String) [], Rem    
+oteException
+    + FullyQualifie 
+   dErrorId : Nati  
+  veCommandError
+ 
+
+    src/app/trajets/
+ride-detail/ride-det
+ail.component.html:8
+8:69:
+[37m      88 Ôöé 
+...="btn btn-lg 
+px-4" (click)="[32m
+bookRide[37m()" [di
+sabled]="ride.availa
+...
+         ÔòÁ        
+                    
+    
+[32m~~~~~~~~[0m
+
+  Error occurs in 
+the template of 
+component 
+RideDetailComponent.
+
+    src/app/trajets/
+ride-detail/ride-det
+ail.component.ts:16:
+15:
+[37m      16 Ôöé   
+templateUrl: [32m'.
+/ride-detail.compone
+nt.html'[37m,
+         ÔòÁ        
+        [32m~~~~~~~
+~~~~~~~~~~~~~~~~~~~~
+~~~[0m
+
+[39m[22m

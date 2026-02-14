@@ -1,0 +1,73 @@
+<div class="container py-4">
+    <h2 class="mb-4 fw-bold"><i class="bi bi-plus-circle-fill me-2" style="color: #08457a;"></i> Publier un trajet</h2>
+
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow-sm border-0">
+                <div class="card-body p-4">
+                    <form [formGroup]="publishForm" (ngSubmit)="onSubmit()">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label for="departureCity" class="form-label fw-bold small">De</label>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-light"><i class="bi bi-geo-alt"></i></span>
+                                    <input type="text" class="form-control bg-light border-start-0" id="departureCity"
+                                        formControlName="departureCity" placeholder="Ville" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="arrivalCity" class="form-label fw-bold small">À</label>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-light"><i class="bi bi-geo-alt-fill"></i></span>
+                                    <input type="text" class="form-control bg-light border-start-0" id="arrivalCity"
+                                        formControlName="arrivalCity" placeholder="Ville" required>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label for="date" class="form-label fw-bold small">Date</label>
+                                <input type="date" class="form-control" id="date" formControlName="date" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="time" class="form-label fw-bold small">Heure</label>
+                                <input type="time" class="form-control" id="time" formControlName="time" required>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label for="price" class="form-label fw-bold small">Prix par place (MRU)</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">MRU</span>
+                                    <input type="number" class="form-control" id="price" formControlName="price"
+                                        required min="0">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="totalSeats" class="form-label fw-bold small">Places disponibles</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="bi bi-people"></i></span>
+                                    <input type="number" class="form-control" id="totalSeats"
+                                        formControlName="totalSeats" required min="1" max="8">
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <label for="description" class="form-label fw-bold small">Description
+                                    (Optionnel)</label>
+                                <textarea class="form-control" id="description" formControlName="description" rows="3"
+                                    placeholder="Ajoutez des détails sur le point de rencontre, les bagages, etc."></textarea>
+                            </div>
+                        </div>
+
+                        <div class="d-grid gap-2 mt-4">
+                            <button type="submit" class="btn btn-lg" [disabled]="publishForm.invalid"
+                                style="background-color: #08457a; color: white;">
+                                <i class="bi bi-send me-2"></i> Publier le trajet
+                            </button>
+                            <a routerLink="/driver" class="btn btn-light text-muted">Annuler</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

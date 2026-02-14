@@ -1,0 +1,104 @@
+<div class="container mt-5" *ngIf="ride">
+    <app-back-button label="Retour"></app-back-button>
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow-lg border-0 rounded-4 overflow-hidden">
+                <div class="card-header text-white p-4" style="background-color: #08457a;">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h2 class="h4 mb-0"><i class="bi bi-car-front me-2"></i> Détails du trajet</h2>
+                        </div>
+                        <span class="badge bg-white fs-6 px-3 py-2 rounded-pill" style="color: #08457a;">{{ ride.price
+                            }} MRU / place</span>
+                    </div>
+                </div>
+                <div class="card-body p-4">
+                    <div class="row mb-4 align-items-center">
+                        <div class="col-md-5 text-center text-md-start">
+                            <h3 class="fw-bold mb-0" style="color: #08457a;">{{ ride.departureCity }}</h3>
+                        </div>
+                        <div class="col-md-2 text-center my-3 my-md-0">
+                            <i class="bi bi-arrow-right fs-3 text-muted"></i>
+                        </div>
+                        <div class="col-md-5 text-center text-md-end">
+                            <h3 class="fw-bold mb-0" style="color: #08457a;">{{ ride.arrivalCity }}</h3>
+                        </div>
+                    </div>
+
+                    <div class="row g-3 mb-4">
+                        <div class="col-sm-6">
+                            <div class="p-3 bg-light rounded-3 h-100">
+                                <small class="text-muted d-block mb-1">Date & Heure</small>
+                                <div class="fw-medium"><i class="bi bi-calendar-event me-2" style="color: #08457a;"></i>
+                                    {{ ride.date | date:'fullDate':'':'fr' }}</div>
+                                <div class="fw-medium mt-1"><i class="bi bi-clock me-2" style="color: #08457a;"></i> {{
+                                    ride.time }}</div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="p-3 bg-light rounded-3 h-100">
+                                <small class="text-muted d-block mb-1">Conducteur</small>
+                                <div class="fw-medium"><i class="bi bi-person-circle me-2" style="color: #08457a;"></i>
+                                    {{ ride.driverName }}</div>
+                                <div class="d-flex align-items-center mt-1 text-muted small">
+                                    <div class="me-2" *ngIf="totalRatings > 0">
+                                        <i class="bi bi-star-fill text-warning"></i>
+                                        <span class="fw-bold ms-1">{{ averageRating | number:'1.1-1' }}</span>
+                                        <span class="ms-1">({{ totalRatings }} avis)</span>
+                                    </div>
+                                    <div *ngIf="totalRatings === 0" class="me-2">
+                                        <span class="badge bg-secondary">Nouveau</span>
+                                    </div>
+                                    <div><i class="bi bi-patch-check-fill text-success"></i> Vérifié</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <h6 class="text-uppercase text-muted small fw-bold mb-3">Disponibilité</h6>
+                        <div class="d-flex align-items-center mb-2">
+                            <div class="progress flex-grow-1" style="height: 10px;">
+                                <div class="progress-bar" role="progressbar"
+                                    [style.width.%]="(ride.availableSeats! / ride.totalSeats) * 100"
+                                    style="background-color: #198754;" aria-valuenow="50" aria-valuemin="0"
+                                    aria-valuemax="100"></div>
+                            </div>
+                            <span class="ms-3 fw-bold">{{ ride.availableSeats }} / {{ ride.totalSeats }} places</span>
+                        </div>
+                    </div>
+
+                    <div class="mb-4" *ngIf="ride.description">
+                        <h6 class="text-uppercase text-muted small fw-bold mb-2">Description</h6>
+                        <p class="text-muted bg-light p-3 rounded-3 fst-italic">"{{ ride.description }}"</p>
+                    </div>
+
+                    <div class="d-flex justify-content-end gap-2 mt-5 border-top pt-4">
+                        <a routerLink="/rides" class="btn btn-outline-secondary px-4">Voir plus</a>
+
+                        <div *ngIf="isDriver">
+                            <button class="btn btn-danger px-4" (click)="deleteRide()">
+                                <i class="bi bi-trash me-2"></i> Supprimer le trajet
+                            </button>
+                        </div>
+                        <div *ngIf="!isDriver" class="d-flex gap-2">
+                            <button class="btn btn-outline-primary px-4" (click)="toggleChat()">
+                                <i class="bi bi-chat-dots me-2"></i> Contacter
+                            </button>
+                            <button class="btn btn-lg px-4" (click)="bookRide()" [disabled]="ride.availableSeats! === 0"
+                                style="background-color: #198754; color: white;">
+                                <i class="bi bi-check-circle-fill me-2"></i> {{ ride.availableSeats! > 0 ? 'Réserver ce
+                                trajet' : 'Complet' }}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Messaging Component -->
+    <app-messaging *ngIf="showChat" [receiverId]="ride.driverId!" [receiverName]="ride.driverName!"
+        [onClose]="closeChat">
+    </app-messaging>
+</div>
