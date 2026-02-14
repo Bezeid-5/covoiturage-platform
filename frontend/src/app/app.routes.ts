@@ -33,9 +33,16 @@ export const routes: Routes = [
     },
 
     // Admin routes
-    { path: 'admin/dashboard', loadComponent: () => import('./dashboards/admin/admin-dashboard.component').then(m => m.AdminDashboardComponent), canActivate: [authGuard] },
-    { path: 'admin/users', loadComponent: () => import('./admin/user-management/user-management.component').then(m => m.UserManagementComponent), canActivate: [authGuard] },
-    { path: 'admin/rides', loadComponent: () => import('./admin/ride-moderation/ride-moderation.component').then(m => m.RideModerationComponent), canActivate: [authGuard] },
+    {
+        path: 'admin',
+        loadComponent: () => import('./dashboards/admin/admin-dashboard.component').then(m => m.AdminDashboardComponent),
+        canActivate: [authGuard],
+        children: [
+            { path: '', loadComponent: () => import('./dashboards/admin/admin-overview.component').then(m => m.AdminOverviewComponent) },
+            { path: 'users', loadComponent: () => import('./admin/user-management/user-management.component').then(m => m.UserManagementComponent) },
+            { path: 'rides', loadComponent: () => import('./admin/ride-moderation/ride-moderation.component').then(m => m.RideModerationComponent) },
+        ]
+    },
 
     // Shared routes (accessible by all authenticated users)
     // Shared routes (access via dashboard preferred)

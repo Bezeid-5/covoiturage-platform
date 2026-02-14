@@ -19,6 +19,7 @@ public class AdminController {
     
     private final UserRepository userRepository;
     private final TrajetRepository trajetRepository;
+    private final com.covoiturage.backend.repository.ReservationRepository reservationRepository;
     
     @GetMapping("/users")
     public ResponseEntity<List<User>> getAllUsers() {
@@ -59,10 +60,34 @@ public class AdminController {
     public ResponseEntity<Map<String, Object>> getStats() {
         long totalUsers = userRepository.count();
         long totalTrajets = trajetRepository.count();
+        long totalReservations = reservationRepository.count();
+        
+        System.out.println("📊 Total Users: " + totalUsers);
+        System.out.println("📊 Total Trajets: " + totalTrajets);
+        System.out.println("📊 Total Reservations: " + totalReservations);
+        
+        // Users by role
+        long passengers = userRepository.countByRole(Role.PASSENGER);
+        long drivers = userRepository.countByRole(Role.DRIVER);
+        long admins = userRepository.countByRole(Role.ADMIN);
+        
+        System.out.println("📊 Passengers: " + passengers);
+        System.out.println("📊 Drivers: " + drivers);
+        System.out.println("📊 Admins: " + admins);
+        
+        Map<String, Long> usersByRole = Map.of(
+            "PASSENGER", passengers,
+            "DRIVER", drivers,
+            "ADMIN", admins
+        );
+        
+        System.out.println("📊 Final usersByRole map: " + usersByRole);
         
         return ResponseEntity.ok(Map.of(
             "totalUsers", totalUsers,
-            "totalTrajets", totalTrajets
+            "totalTrajets", totalTrajets,
+            "totalReservations", totalReservations,
+            "usersByRole", usersByRole
         ));
     }
 }

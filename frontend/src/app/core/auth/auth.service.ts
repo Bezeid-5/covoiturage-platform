@@ -76,8 +76,8 @@ export class AuthService {
       console.log('✅ Redirecting to /driver');
       this.router.navigate(['/driver']);
     } else if (role === 'ADMIN') {
-      console.log('✅ Redirecting to /admin/dashboard');
-      this.router.navigate(['/admin/dashboard']);
+      console.log('✅ Redirecting to /admin');
+      this.router.navigate(['/admin']);
     } else {
       console.log('❌ No valid role found, redirecting to login');
       this.router.navigate(['/auth/login']);

@@ -29,4 +29,8 @@ export class AdminService {
     getStats(): Observable<any> {
         return this.http.get(`${environment.apiUrl}/admin/stats`);
     }
+
+    getStatistics(): Observable<any> {
+        return this.getStats();
+    }
 }
